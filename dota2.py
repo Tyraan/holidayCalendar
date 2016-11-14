@@ -22,6 +22,7 @@ if req.status_code and req.status_code==200:
     currentNumber=int(currentNumber.string.replace(',',''))
     peakNumber  = int(peakNumber.string.replace(',',''))
     now = datetime.datetime.now().strftime("%H:%M")  
+    date = datetime.datetime.now().strftime("%Y-%m-%d")
 
 
 #savedata
@@ -36,10 +37,13 @@ if now:
               date varchar(20) NOT NULL,
               time varchar(20) NOT Null
                );""")
-    sql = "INSERT INTO DOTA2 (currentNumber,peakNumber,date,time) VALUES ( %d ,%d,date('now'),'%s')"%(currentNumber,peakNumber,now)
+    sql = "INSERT INTO DOTA2 (currentNumber,peakNumber,date,time) VALUES ( %d ,%d,'%s','%s')"%(currentNumber,peakNumber,date,now)
     cur.execute(sql)
+    cur.execute("select * from DOTA2 ")
+    for i in cur.fetchall():
+    	print(i)
     conn.commit()
     print("data inserted %d ,%d ,%s"%(currentNumber,peakNumber,now))
     conn.close()
+ 
 
-print('crontab has executed!')
