@@ -15,8 +15,9 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
 
-num_bins = 60
 
+
+num_bins = 50
 # the histogram of the data
 n, bins, patches = plt.hist(x, num_bins, normed=1, facecolor='yello', alpha=0.5)
 # add a 'best fit' line
