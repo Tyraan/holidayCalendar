@@ -1,7 +1,7 @@
 import matplotlib
 import numpy
 import datetime
-from pylab import *
+import pylab as pl
 import sqlite3
 
 
@@ -21,25 +21,11 @@ for i in range(61):
     average_online_number.append(int(sum(a)/len(a)))
     startdate = startdate+datetime.timedelta(days=1)
 
+x = list(range(len(peak_online_number)))
+pl.plot(x,peak_online_number)
+pl.xlabel("")
 
-num_bins = len(peak_online_number)
-mu = 100
-sigma = 15
-
-peak_online_number_array = numpy.asarray(peak_online_number)
-# the histogram of the data
-n, bins, patches = plt.hist(peak_online_number_array, num_bins, normed=1, facecolor='red', alpha=0.7)
-# add a 'best fit' line
-y = mlab.normpdf(bins, mu, sigma)
-plt.plot(bins, y, 'r--')
-plt.xlabel('时间')
-plt.ylabel('最高在线人数')
-plt.title(r'dota2 9月10 月在线人数')
-# Tweak spacing to prevent clipping of ylabel
-plt.subplots_adjust(left=0.15)
-plt.show()
-
-
+pl.show()
 
 
 
