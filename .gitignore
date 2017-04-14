@@ -2,11 +2,10 @@
 ## Eclipse
 #################
 
-.idea
+.idea/
 *.pydevproject
 .project
 .metadata
-holidayCalendar_env/
 bin/
 tmp/
 *.tmp
