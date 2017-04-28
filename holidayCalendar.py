@@ -6,6 +6,8 @@ import os,sqlite3,json
 from flask import Flask,request,session,g,url_for,render_template,jsonify
 app  = Flask(__name__)
 app.config.from_object('config')
+
+
 def connect_db():
     """Connects to the specific database."""
 
@@ -30,6 +32,22 @@ def get_db():
 @app.before_request
 def before_request():
     g.db = connect_db()
+
+
+def fetch_data():
+    sql = "select * from DOTA2 ORDER BY id DESC limit 90"
+    conn = sqlite3
+    curs = conn.coursor()
+    data =curs.execute(sql)
+    return data.fetchall()
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
 ################################
 #route
 @app.route('/')
